@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<script src='./scripts/color.js'></script>
+	<link rel='stylesheet' href='./styles/color.css'>
+	<link rel='icon' href='./media/color.png'>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name="description" content="Guess the hex code of a color">
+		<meta name="author" content="SimonDMC">
+		<title>Color Guesser</title>
+	</head>
+	<body onload='load()'>
+		<div id='center'>
+			<div id='box'>
+				<div id='color'></div>
+				<p id='colorcode'></p>
+				<input id='input' type='text' maxlength='7'></input>
+				<div id='right'>
+					<div id='preview'></div>
+				</div>
+				<button id='button' onclick='check()'>Check</button>
+				<p id='feedback'></p>
+			</div>
+		</div>
+		<!--- <a id='credit' href='https://youtube.com/SimonDMC'>Made by SimonDMC</a> --->
+	</body>
+</html>

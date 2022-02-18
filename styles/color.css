@@ -1,0 +1,106 @@
+html, body {
+  font-size: 50px;
+  background-color: #E0E0FF;
+}
+html, body, input, button {
+  font-family: Helvetica;
+}
+#center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0px;
+}
+#right {
+  display: flex;
+  justify-content: flex-end;
+}
+#box {
+  padding: 40px 40px 40px 40px;
+  box-shadow: 0 0 15px -4px black;
+  background-color: white;
+  border-radius: 30px;
+}
+#color {
+  width: 600px;
+  height: 360px;
+  border-radius: 15px;
+  box-shadow: 0 0 10px -4px black;
+}
+#colorcode {
+  position: absolute;
+  top: 150px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 50px;
+  color: white;
+  transition-duration: 0.5s;
+  transition-property: opacity;
+  opacity: 0;
+}
+#input {
+  transform: translate(0, 10px);
+  width: 592px;
+  height: 40px;
+  border: none;
+  box-shadow: 0 0 9px -2px black;
+  border-radius: 6px;
+  font-size: 30px;
+  text-align: center;
+  transition-duration: 0.5s;
+}
+#button {
+  transform: translate(200px, 0);
+  background-color: #E0E0FF;
+  border: none;
+  color: black;
+  text-align: center;
+  cursor: pointer;
+  width: 200px;
+  height: 60px;
+  border-radius: 10px;
+  font-size: 36px;
+  box-shadow: 0 0 10px -6px black;
+  transition-duration: 0.5s;
+  transition-property: opacity;
+  z-index: 2;
+}
+#preview {
+  width: 0;
+  height: 42px;
+  border-radius: 6px;
+  box-shadow: 0 0 6px black;
+  background-color: blue;
+  transform: translate(0, -33px);
+  transition-duration: 0.5s;
+  transition-property: width;
+}
+#feedback {
+  position: absolute;
+  top: 478px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 36px;
+  opacity: 0;
+  transition-duration: 0.5s;
+  z-index: 1;
+}
+#credit {
+  font-size: 20px;
+  color: white;
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, -110%);
+}
+
+/* taken and modified from https://www.w3schools.com/howto/howto_css_shake_image.asp */
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  20% { transform: translate(-1px, -2px) rotate(-0.5deg); }
+  40% { transform: translate(-3px, 0px) rotate(0.5deg); }
+  60% { transform: translate(3px, 2px) rotate(0deg); }
+  80% { transform: translate(1px, -1px) rotate(0.5deg); }
+  100% { transform: translate(-2px, 1px) rotate(-0.5deg); }
+}
