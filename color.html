@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang='en'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src='./scripts/color.js'></script>
 	<link rel='stylesheet' href='./styles/color.css'>
 	<link rel='icon' href='./media/color.png'>
@@ -8,20 +9,28 @@
 		<meta name="description" content="Guess the hex code of a color">
 		<meta name="author" content="SimonDMC">
 		<title>Color Guesser</title>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-0FSS6M37DL"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'G-0FSS6M37DL');
+        </script>
 	</head>
-	<body onload='load()'>
+	<body>
 		<div id='center'>
 			<div id='box'>
 				<div id='color'></div>
 				<p id='colorcode'></p>
-				<input id='input' type='text' maxlength='7'></input>
+				<input id='input' type='text' maxlength='6' autofocus></input>
 				<div id='right'>
 					<div id='preview'></div>
 				</div>
-				<button id='button' onclick='check()'>Check</button>
+				<button id='button'>Check</button>
 				<p id='feedback'></p>
 			</div>
 		</div>
-		<!--- <a id='credit' href='https://youtube.com/SimonDMC'>Made by SimonDMC</a> --->
 	</body>
 </html>

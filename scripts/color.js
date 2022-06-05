@@ -1,69 +1,71 @@
 let color;
 
-function load() {
+$(function() {
   // color thingies
   generateColor();
 
   // register event listener for enter in input https://stackoverflow.com/a/7060762
-  document.getElementById('input').addEventListener('keyup', function(e) {
-    if (e.key === 'Enter' || e.keyCode === 13) {
+  $('input').keydown(function(e) {
+    if (e.key === 'Enter') {
       check();
     }
   });
-}
+
+  // register event listener for button
+  $('#button').click(check);
+});
 
 async function check() {
   let disabled;
   if (disabled) return; // if animation is happening
 
-  const box = document.getElementById('box');
-  const colorBox = document.getElementById('color');
-  const textBox = document.getElementById('input');
-  const colorcode = document.getElementById('colorcode');
-  const button = document.getElementById('button');
-  const preview = document.getElementById('preview');
-  const feedback = document.getElementById('feedback');
+  const box = $('#box');
+  const colorBox = $('#color');
+  const textBox = $('#input');
+  const colorcode = $('#colorcode');
+  const button = $('#button');
+  const preview = $('#preview');
+  const feedback = $('#feedback');
 
   // assess value
-  let input = textBox.value;
-  input = input.replace('#','');
+  let input = textBox.val();
   let re = new RegExp('^[a-fA-F0-9]{6}$'); // hex code regex (hopefully)
   if (!re.test(input)) {
     // invalid input
-    box.style.animation = 'shake 0.2s';
+    box.css('animation', 'shake 0.2s');
     await new Promise(r => setTimeout(r, 200));
-    box.style.animation = 'none';
+    box.css('animation', 'none');
     return;
   }
   let decInput = parseInt(input, 16);
 
   // animation
   let accuracy = getAccuracyOfColor(decInput);
-  textBox.style.width = '535px';
-  button.style.opacity = '0';
-  colorcode.style.opacity = '1';
-  colorcode.style.color = ((((color >> 16) & 0xff) + ((color >> 8) & 0xff) + ((color >> 0) & 0xff)) / 765 > 0.7 ? 'black' : 'white'); // determine luminosity of color and display based on that
-  colorcode.innerHTML = '#' + color.toString(16).toUpperCase();
-  preview.style.backgroundColor = '#' + input;
-  preview.style.width = '42px';
+  textBox.css('width', '535px');
+  button.css('opacity', '0');
+  colorcode.css('opacity', '1');
+  colorcode.css('color', ((((color >> 16) & 0xff) + ((color >> 8) & 0xff) + ((color >> 0) & 0xff)) / 765 > 0.7 ? 'black' : 'white')); // determine luminosity of color and display based on that
+  colorcode.text('#' + color.toString(16).toUpperCase());
+  preview.css('background-color', '#' + input);
+  preview.css('width', '42px');
   disabled = true;
   await new Promise(r => setTimeout(r, 300)); //https://stackoverflow.com/a/39914235
-  feedback.innerHTML = `Accuracy: ${accuracy}%`;
-  feedback.style.opacity = '1';
+  feedback.text(`Accuracy: ${accuracy}%`);
+  feedback.css('opacity', '1');
   await new Promise(r => setTimeout(r, 5000));
-  textBox.style.width = '592px';
-  feedback.style.opacity = '0';
-  preview.style.width = '0';
+  textBox.css('width', '592px');
+  feedback.css('opacity', '0');
+  preview.css('width', '0');
   await new Promise(r => setTimeout(r, 300));
-  button.style.opacity = '1';
-  colorcode.style.opacity = '0';
+  button.css('opacity', '1');
+  colorcode.css('opacity', '0');
   await new Promise(r => setTimeout(r, 100));
-  textBox.value = '';
-  feedback.innerHTML = '';
-  colorBox.style.transitionDuration = '0.5s';
+  textBox.val('');
+  feedback.text('');
+  colorBox.css('transition-duration', '0.5s');
   generateColor();
   await new Promise(r => setTimeout(r, 400));
-  colorcode.innerHTML = '';
+  colorcode.text('');
   disabled = false;
 }
 
@@ -90,7 +92,7 @@ function getAccuracyOfColor(guess) {
 
   totalDiff /= 6; // error threshold
 
-  console.log(`Post-adjustment: ${totalDiff}`);
+  console.log(`Post-adjustment: ${Math.round(totalDiff*10)/10}`);
 
   let accuracy = 100 - totalDiff;
   accuracy = Math.round(accuracy); // prettify
@@ -103,7 +105,7 @@ function generateColor() {
   do {
     color = Math.floor(Math.random()*16777215);
   } while (color.toString(16).length == 5); // 0 at the end has the tendency to break it
-  document.getElementById('color').style.backgroundColor = '#' + color.toString(16);
+  $('#color').css('background-color', '#' + color.toString(16));
 }
 
 // unlisted function, gets color (you can use it in console to cheat ig)

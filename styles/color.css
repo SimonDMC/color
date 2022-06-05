@@ -2,9 +2,11 @@ html, body {
   font-size: 50px;
   background-color: #E0E0FF;
 }
+
 html, body, input, button {
   font-family: Helvetica;
 }
+
 #center {
   position: fixed;
   top: 50%;
@@ -12,22 +14,26 @@ html, body, input, button {
   transform: translate(-50%, -50%);
   padding: 0px;
 }
+
 #right {
   display: flex;
   justify-content: flex-end;
 }
+
 #box {
   padding: 40px 40px 40px 40px;
   box-shadow: 0 0 15px -4px black;
   background-color: white;
   border-radius: 30px;
 }
+
 #color {
   width: 600px;
   height: 360px;
   border-radius: 15px;
   box-shadow: 0 0 10px -4px black;
 }
+
 #colorcode {
   position: absolute;
   top: 150px;
@@ -39,6 +45,7 @@ html, body, input, button {
   transition-property: opacity;
   opacity: 0;
 }
+
 #input {
   transform: translate(0, 10px);
   width: 592px;
@@ -50,6 +57,12 @@ html, body, input, button {
   text-align: center;
   transition-duration: 0.5s;
 }
+
+/* remove default focus border */
+textarea:focus, input:focus{
+  outline: none;
+}
+
 #button {
   transform: translate(200px, 0);
   background-color: #E0E0FF;
@@ -66,6 +79,7 @@ html, body, input, button {
   transition-property: opacity;
   z-index: 2;
 }
+
 #preview {
   width: 0;
   height: 42px;
@@ -76,6 +90,7 @@ html, body, input, button {
   transition-duration: 0.5s;
   transition-property: width;
 }
+
 #feedback {
   position: absolute;
   top: 478px;
@@ -86,6 +101,7 @@ html, body, input, button {
   transition-duration: 0.5s;
   z-index: 1;
 }
+
 #credit {
   font-size: 20px;
   color: white;
