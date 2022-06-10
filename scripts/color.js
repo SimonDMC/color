@@ -1,6 +1,23 @@
 let color;
 
 $(function() {
+  generatePopup({
+      id: 'color-info',
+      title: 'Color Guesser',
+      content: `
+        You are presented with a color.
+        Estimate the hex code of the color.
+        Six characters, ranging from 00-FF for 3 channels.
+        Values are in <a href="https://learn.sparkfun.com/tutorials/hexadecimal/hex-basics" target="_blank">Base-16</a>.
+        big-margin§{bold}[#{red}[E4]{green}[F2]{blue}[DB]]
+        big-margin§{black bold}[#000000] is black.                {white bold shadow}[#FFFFFF] is white.
+        big-margin§Good luck.`,
+      titleColor: 'rgb(92, 0, 95)',
+      backgroundColor: '#ffebfe',
+      showImmediately: true,
+      showOnce: true,
+  });
+
   // color thingies
   generateColor();
 
@@ -11,9 +28,12 @@ $(function() {
     }
   });
 
-  // register event listener for button
+  // register event listener for buttons
   $('#button').click(check);
+  $('.help').click(showHelp);
 });
+
+let showHelp = () => showPopup('color-info');
 
 async function check() {
   let disabled;

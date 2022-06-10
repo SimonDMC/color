@@ -120,3 +120,19 @@ textarea:focus, input:focus{
   80% { transform: translate(1px, -1px) rotate(0.5deg); }
   100% { transform: translate(-2px, 1px) rotate(-0.5deg); }
 }
+
+.help {
+  margin-top: .8%;
+  margin-left: auto;
+  margin-right: .5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3vw;
+  height: 3vw;
+  border-radius: 10px;
+  box-shadow: 0 0 5px black;
+  font-size: 2vw;
+  background-color: #FFF;
+  cursor: pointer;
+}
