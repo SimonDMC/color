@@ -61,7 +61,8 @@ async function check() {
 
   // animation
   let accuracy = getAccuracyOfColor(decInput);
-  textBox.css('width', '535px');
+  textBox.css('width', '80%');
+  textBox.css('margin-right', '20px');
   button.css('opacity', '0');
   colorcode.css('opacity', '1');
   colorcode.css('color', ((((color >> 16) & 0xff) + ((color >> 8) & 0xff) + ((color >> 0) & 0xff)) / 765 > 0.7 ? 'black' : 'white')); // determine luminosity of color and display based on that
@@ -73,7 +74,8 @@ async function check() {
   feedback.text(`Accuracy: ${accuracy}%`);
   feedback.css('opacity', '1');
   await new Promise(r => setTimeout(r, 5000));
-  textBox.css('width', '592px');
+  textBox.css('margin-right', '0');
+  textBox.css('width', '100%');
   feedback.css('opacity', '0');
   preview.css('width', '0');
   await new Promise(r => setTimeout(r, 300));
