@@ -95,30 +95,16 @@ async function check() {
 function getAccuracyOfColor(guess) {
 
   // https://stackoverflow.com/a/12043228
-  let realR = (color >> 16) & 0xff;
-  let realG = (color >> 8) & 0xff;
-  let realB = (color >> 0) & 0xff;
-  let guessR = (guess >> 16) & 0xff;
-  let guessG = (guess >> 8) & 0xff;
-  let guessB = (guess >> 0) & 0xff;
+  let actualColor = [(color >> 16) & 0xff, (color >> 8) & 0xff, (color >> 0) & 0xff];
+  let guessedColor = [(guess >> 16) & 0xff, (guess >> 8) & 0xff, (guess >> 0) & 0xff];
 
-  console.log(`Actual color: R${realR} G${realG} B${realB}`);
-  console.log(`Guessed color: R${guessR} G${guessG} B${guessB}`);
+  console.log(`Actual color: R${actualColor[0]} G${actualColor[1]} B${actualColor[2]}`);
+  console.log(`Guessed color: R${guessedColor[0]} G${guessedColor[1]} B${guessedColor[2]}`);
 
-  let diffR = Math.abs(realR - guessR);
-  let diffG = Math.abs(realG - guessG);
-  let diffB = Math.abs(realB - guessB);
-  let totalDiff = diffR + diffG + diffB;
+  /* the function outputs 0 as identical color and 768 as completely opposite,
+    so we need to normalize the values to 0-100 range and flip them */
+  let accuracy = 100 - Math.round(deltaRgb(actualColor, guessedColor) / 7.68);
 
-  console.log(`Total difference: ${totalDiff}`);
-
-  totalDiff /= 6; // error threshold
-
-  console.log(`Post-adjustment: ${Math.round(totalDiff*10)/10}`);
-
-  let accuracy = 100 - totalDiff;
-  accuracy = Math.round(accuracy); // prettify
-  if (accuracy < 0) accuracy = 0; // wow you're really bad at this huh
   return accuracy;
 }
 
@@ -133,4 +119,22 @@ function generateColor() {
 // unlisted function, gets color (you can use it in console to cheat ig)
 function getColor() {
   return color.toString(16);
+}
+
+/**
+ * https://gist.github.com/ryancat/9972419b2a78f329ce3aebb7f1a09152
+ * 
+ * Compare color difference in RGB
+ * @param {Array} rgb1 First RGB color in array
+ * @param {Array} rgb2 Second RGB color in array
+ */
+ function deltaRgb (rgb1, rgb2) {
+  const [ r1, g1, b1 ] = rgb1,
+        [ r2, g2, b2 ] = rgb2,
+        drp2 = Math.pow(r1 - r2, 2),
+        dgp2 = Math.pow(g1 - g2, 2),
+        dbp2 = Math.pow(b1 - b2, 2),
+        t = (r1 + r2) / 2
+
+  return Math.sqrt(2 * drp2 + 4 * dgp2 + 3 * dbp2 + t * (drp2 - dbp2) / 256)
 }
